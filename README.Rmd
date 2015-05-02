@@ -122,6 +122,8 @@ dat_short = dat %>% select(intern_status, total_hours_worked,
                            graduation_rate_of_hs)
 
 dat_short_complete = dat_short[complete.cases(dat_short),]
+
+# Heatmap
 heatmap.2(cor(as.matrix(dat_short_complete %>% select(-intern_status))),
           margins=c(26, 26), trace='none')
 
@@ -146,14 +148,20 @@ rescale = function(x) {
     (x - min(x)) / max(x)
 }
 
-dat_short_complete$median_household_income = rescale(dat_short_complete$median_household_income)
-dat_short_complete$total_hours_worked      = log1p(dat_short_complete$total_hours_worked)
+dat_scaled = dat_short_complete
 
+dat_scaled$median_household_income  = rescale(dat_scaled$median_household_income)
+dat_scaled$total_hours_worked       = rescale(dat_scaled$total_hours_worked)
+dat_scaled$ssi                      = rescale(dat_scaled$ssi)
+dat_scaled$unemployment_rate        = rescale(dat_scaled$unemployment_rate)
+dat_scaled$female_headed_households = rescale(dat_scaled$female_headed_households)
+dat_scaled$cash_assistance          = rescale(dat_scaled$cash_assistance)
+dat_scaled$snap                     = rescale(dat_scaled$snap)
 
 # numeric fields only
 #mat = dat_short_complete %>% select(-intern_status)
 #mat_scaled = scale(dat_short_complete)
-heatmap.2(as.matrix(dat_short_complete %>% select(-intern_status)),
+heatmap.2(as.matrix(dat_scaled %>% select(-intern_status)),
           margins=c(26, 26), trace='none',
           RowSideColors=location_colors_complete)
 ```

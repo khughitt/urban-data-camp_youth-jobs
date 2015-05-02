@@ -2,6 +2,11 @@
 title: #UrbanDataCamp: Using Data to Help Low-Income Youth Find Jobs
 author: Keith Hughitt
 date: 2015/05/02
+output:
+    html_document:
+        self_contained: false
+    md_document:
+        variant: markdown_github
 ---
 
 <div style='font-size: 36px'>#UrbanDataCamp: Using Data to Help Low-Income Youth Find Jobs</div>
@@ -27,10 +32,10 @@ library(dplyr)
 dat = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29.csv')
 
 # preview data
-kable(dat[,1:8])
-kable(dat[,9:16])
-kable(dat[,17:24])
-kable(dat[,24:33])
+kable(dat[1:5, 1:8])
+kable(dat[1:5, 9:16])
+kable(dat[1:5, 17:24])
+kable(dat[1:5, 24:33])
 ```
 
 ### Variables

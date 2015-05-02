@@ -203,6 +203,61 @@ write_csv(dat, 'input/UA_UI_DataCamp_with_Codebook_4_29_clean.csv')
 
 ### Exploratory data analysis
 
+#### Variable relationships
+
 ``` r
 library(gplots)
+library(bpca)
+library(RColorBrewer)
+
+dat_short = dat %>% select(intern_status, total_hours_worked,
+                           median_household_income,
+                           labor_force_participation, unemployment_rate,
+                           ssi, cash_assistance, snap,
+                           all_families_below_poverty,
+                           educational_attainment_ba, female_headed_households,
+                           graduation_rate_of_hs)
+
+dat_short_complete = dat_short[complete.cases(dat_short),]
+heatmap.2(cor(as.matrix(dat_short_complete %>% select(-intern_status))),
+          margins=c(26, 26), trace='none')
 ```
+
+![](README_files/figure-markdown_github/eda-1.png)
+
+``` r
+# group by location
+location_colors = brewer.pal(length(unique(dat$location)), "Set1")[
+    as.numeric(as.factor((as.character(dat$location))))]
+names(location_colors) = dat$location
+
+location_colors_complete = location_colors[complete.cases(dat_short)]
+
+# biplot
+plot(bpca(dat_short_complete %>% select(-intern_status),
+          var.color=location_colors_complete, scale=TRUE))
+```
+
+![](README_files/figure-markdown_github/eda-2.png)
+
+#### Students
+
+``` r
+# rescale data
+rescale = function(x) {
+    (x - min(x)) / max(x)
+}
+
+dat_short_complete$median_household_income = rescale(dat_short_complete$median_household_income)
+dat_short_complete$total_hours_worked      = log1p(dat_short_complete$total_hours_worked)
+
+
+# numeric fields only
+#mat = dat_short_complete %>% select(-intern_status)
+#mat_scaled = scale(dat_short_complete)
+heatmap.2(as.matrix(dat_short_complete %>% select(-intern_status)),
+          margins=c(26, 26), trace='none',
+          RowSideColors=location_colors_complete)
+```
+
+![](README_files/figure-markdown_github/student_vis-1.png)

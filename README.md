@@ -259,6 +259,7 @@ dat_scaled$unemployment_rate        = rescale(dat_scaled$unemployment_rate)
 dat_scaled$female_headed_households = rescale(dat_scaled$female_headed_households)
 dat_scaled$cash_assistance          = rescale(dat_scaled$cash_assistance)
 dat_scaled$snap                     = rescale(dat_scaled$snap)
+dat_scaled$all_families_below_poverty = rescale(dat_scaled$all_families_below_poverty)
 
 # numeric fields only
 #mat = dat_short_complete %>% select(-intern_status)
@@ -269,3 +270,14 @@ heatmap.2(as.matrix(dat_scaled %>% select(-intern_status)),
 ```
 
 ![](README_files/figure-markdown_github/student_vis-1.png)
+
+#### Intern status
+
+``` r
+library(ggplot2)
+ggplot(dat_short_complete, aes(total_hours_worked, median_household_income,
+                               group=intern_status), color=intern_status) +
+    geom_point(aes(color=intern_status))
+```
+
+![](README_files/figure-markdown_github/inter_status-1.png)

@@ -87,7 +87,7 @@ table(dat[['Intern Status']])
 
 For easier typing...
 
-```{rename_vars}
+```{r rename_vars}
 colnames(dat) = c('datacamp_id', 'academic_year', 'location', 'intern_status',
                   'intern_work_site', 'work_site_zip', 'organization', 'industry',
                   'total_hours_worked', 'dob', 'mailing_zip',
@@ -108,7 +108,5 @@ write_csv(dat, 'input/UA_UI_DataCamp_with_Codebook_4_29_clean.csv')
 
 ```{r eda}
 library(gplots)
-
-heatmap.2(dat %>% select())
 ```
 

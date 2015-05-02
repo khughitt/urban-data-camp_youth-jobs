@@ -1,5 +1,30 @@
 \#UrbanDataCamp: Using Data to Help Low-Income Youth Find Jobs
 
+Overview
+========
+
+Questions
+---------
+
+1.  Can we show that job opportunities for less-privileged youths leads to good outcomes later in life? (College enrollment, etc.)
+
+Notes
+-----
+
+### General
+
+-   "Alumni"
+-   "Terminated" - didn't finish
+
+### Factors associated with a positive outcome:
+
+-   college enrollment
+-   college persistence
+-   alumni
+
+Methods
+=======
+
 Load data
 ---------
 
@@ -77,6 +102,8 @@ kable(dat[1:5, 26:33])
 
 ### Variables
 
+Note: Formatting for metadata is a little bit messed up...
+
 ``` r
 metadata = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29_metadata.csv')
 kable(metadata)
@@ -127,3 +154,55 @@ kable(metadata)
 | No record found: Alum did not have a Nat | ional Student Clearinghouse record                                                                                                                                   |
 | 1st Year College State                   | State in which college is located                                                                                                                                    |
 | Student Quote                            | Open-ended response from intern post-program survey                                                                                                                  |
+
+``` r
+# convert dates to factors so they aren't treated as numeric
+dat[['Work Site ZIP Code']]      = factor(dat[['Work Site ZIP Code']])
+dat[['Mailing ZIP/Postal Code']] = factor(dat[['Mailing ZIP/Postal Code']])
+dat[['HS ZIP Code']]             = factor(dat[['HS ZIP Code']])
+```
+
+``` r
+table(dat[['Intern Status']])
+```
+
+    ## 
+    ##                                 Active 
+    ##                                    355 
+    ##                                 Alumni 
+    ##                                    744 
+    ##                  Summer Program Alumni 
+    ##                                     42 
+    ##                     Terminated Student 
+    ##                                     29 
+    ## Terminated Student - Performance Based 
+    ##                                    109 
+    ##      Terminated Student - Self Removed 
+    ##                                    117
+
+### Rename variables
+
+For easier typing...
+
+``` r
+colnames(dat) = c('datacamp_id', 'academic_year', 'location', 'intern_status',
+                  'intern_work_site', 'work_site_zip', 'organization', 'industry',
+                  'total_hours_worked', 'dob', 'mailing_zip',
+                  'median_household_income', 'labor_force_participation',
+                  'unemployment_rate', 'ssi', 'cash_assistance', 'snap',
+                  'all_families_below_poverty', 'educational_attainment_ba',
+                  'female_headed_households', 'race', 'gender', 'high_school',
+                  'title_i_school', 'frl', 'graduation_rate_of_hs',
+                  'college_enrollment_of_hs', 'hs_zip_code', 'nsc_data_available',
+                  'first_year_college_enrollment', 'first_year_college_type',
+                  'first_year_college_state', 'student_quote')
+
+# save with alternative name
+write_csv(dat, 'input/UA_UI_DataCamp_with_Codebook_4_29_clean.csv')
+```
+
+### Exploratory data analysis
+
+``` r
+library(gplots)
+```

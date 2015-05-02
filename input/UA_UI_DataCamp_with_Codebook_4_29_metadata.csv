@@ -1,0 +1,44 @@
+Column Heading,Description
+DataCamp ID,Unique intern identifier
+Academic Year,Program year of participation
+Location,Urban Alliance program/region
+Intern Status,"Active: Intern is currently in program
+Alumni: Intern successfully completed program.
+Summer Program Alumni: Intern successfully completed the program and will likely return in the fall (Rising HS seniors)
+Terminated: Dropped out of the program due to performance reasons or self-removal"
+Intern Work Site,"Tag for where interns worked, comprised of organization name, location, and academic year"
+Work Site ZIP Code,ZIP Code of Intern Work Site
+Organization,Work Site Organization Name
+Industry,Specific industry organization falls into
+Total Hours Worked ,Sum of monthly hours interns worked during the program; compiled from ADP payroll reports
+DOB,Intern date of birth
+Mailing ZIP/Postal Code,Intern's home ZIP Code
+Median Household Income,ZIP Code-based; Median household income of residents within intern's home ZIP code; ACS 2013 5-year estimates
+Labor Force Participation,ZIP Code-based; Labor force participation rate of residents within intern's home ZIP code; ACS 2013 5-year estimates
+Unemployment Rate,ZIP Code-based; Unemployment rate of residents within intern's home ZIP code; ACS 2013 5-year estimates
+SSI,ZIP Code-based; Percent of residents receiving SSI within intern's home ZIP code; ACS 2013 5-year estimates
+Cash Assistance,ZIP Code-based; Percent of residents receiving cash assistance within intern's home ZIP code; ACS 2013 5-year estimates
+SNAP,ZIP Code-based; Percent of residents receiving SNAP benefits within intern's home ZIP code; ACS 2013 5-year estimates
+All Families Below Poverty,ZIP Code-based; Percent of residents living below poverty within intern's home ZIP code; ACS 2013 5-year estimates
+Educational Attainment - BA or Higher,ZIP Code-based; Percent of residents with a Bachelor's degree or higher within intern's home ZIP code; ACS 2013 5-year estimates
+Female-Headed Households,ZIP Code-based; Percent of residents living in female-headed households with children under 18 years of age within intern's home ZIP code; ACS 2013 5-year estimates
+Race,"Intern race (self-identified, voluntary)"
+Gender,"Intern gender (self-identified, voluntary)"
+High School,High School intern attended
+Title I School?,"School-based
+1: High School receives Title I funding
+0: High School does not receive Title I funding
+blank: Title I data not found"
+FRL ,School-based; Percent of students in high school qualified for free or reduced lunch
+Graduation Rate of HS,School-based; Percent of high school students graduating within four years
+College Enrollment Rate of HS,School-based; Percent of high school students who enroll in college following graudation
+HS ZIP Code,ZIP Code of High School
+NSC Data Available?,"1: Alum has been included in a National Student Clearinghouse data request to determine college enrollment
+0: Alum has not been included in a National Student Clearinghouse data request to determine college enrollment "
+1st Year College Enrollment,"Enrolled: Alum was enrolled in college at time of National Student Clearinghouse data pull 
+Unenrolled: Alum was not enrolled at time of National Student Clearinghouse data pull "
+1st Year College Type (2/4),"2: Two-year college
+4: Four-year college
+No record found: Alum did not have a National Student Clearinghouse record"
+1st Year College State,State in which college is located
+Student Quote,Open-ended response from intern post-program survey

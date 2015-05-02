@@ -1,0 +1,41 @@
+---
+title: #UrbanDataCamp: Using Data to Help Low-Income Youth Find Jobs
+author: Keith Hughitt
+date: 2015/05/02
+---
+
+<div style='font-size: 36px'>#UrbanDataCamp: Using Data to Help Low-Income Youth Find Jobs</div>
+
+```{r knitr_settings, include=FALSE}
+library(knitr)
+opts_knit$set(progress=FALSE, verbose=TRUE)
+opts_chunk$set(fig.width=1080/96,
+               fig.height=1080/96,
+               dpi=96)
+options(digits=4)
+options(stringsAsFactors=FALSE)
+rm(list=ls())    # Clean up any existing variables
+```
+
+Load data
+---------
+
+```{r load_data, results='asis'}
+library(readr)
+library(dplyr)
+
+dat = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29.csv')
+
+# preview data
+kable(dat[,1:8])
+kable(dat[,9:16])
+kable(dat[,17:24])
+kable(dat[,24:33])
+```
+
+### Variables
+
+```{r variables, results='asis'}
+metadata = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29_metadata.csv')
+kable(metadata)
+```

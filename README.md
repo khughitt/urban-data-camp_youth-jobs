@@ -214,7 +214,7 @@ library(RColorBrewer)
 # the current (2014-2015) interns who haven't yet finished
 dat_short = dat %>%
     filter(academic_year != '2014 - 2015' & industry != "") %>%
-    select(intern_status, industry, total_hours_worked,
+    select(datacamp_id, intern_status, industry, total_hours_worked,
            median_household_income, labor_force_participation,
            unemployment_rate, ssi, cash_assistance, snap,
            all_families_below_poverty, educational_attainment_ba,
@@ -225,6 +225,10 @@ dat_short = dat %>%
     
 dat_short_complete = dat_short[complete.cases(dat_short),]
 
+ids = dat_short_complete$datacamp_id
+
+dat_short_complete = dat_short_complete %>% select(-datacamp_id)
+
 # Heatmap
 heatmap.2(cor(as.matrix(dat_short_complete %>% select(-intern_status, -industry))),
           margins=c(26, 26), trace='none')
@@ -234,11 +238,9 @@ heatmap.2(cor(as.matrix(dat_short_complete %>% select(-intern_status, -industry)
 
 ``` r
 # group by location
-location_colors = brewer.pal(length(unique(dat$location)), "Set1")[
+dat$location_colors = brewer.pal(length(unique(dat$location)), "Set1")[
     as.numeric(as.factor((as.character(dat$location))))]
-names(location_colors) = dat$location
-
-location_colors_complete = location_colors[complete.cases(dat_short)]
+location_colors_complete = dat$location_colors[dat$datacamp_id %in% ids]
 
 # biplot
 plot(bpca(dat_short_complete %>% select(-intern_status, -industry),

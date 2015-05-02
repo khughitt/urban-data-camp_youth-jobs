@@ -16,52 +16,64 @@ dat = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29.csv')
 
 ``` r
 # preview data
-kable(dat[1:5, 1:8])
+kable(dat[1:5, 1:6])
 ```
 
-| DataCamp ID | Academic Year | Location                            | Intern Status | Intern Work Site                                               |  Work Site ZIP Code| Organization                             | Industry    |
-|:------------|:--------------|:------------------------------------|:--------------|:---------------------------------------------------------------|-------------------:|:-----------------------------------------|:------------|
-| UADC1096    | 2014 - 2015   | DC - Year Round High School Program | Active        | Clark Construction Group, LLC Accounts Payable 2014-2015       |               20814| Clark Construction Group, LLC            | Real Estate |
-| UADC1281    | 2014 - 2015   | NCR                                 | Active        | Patent and Trade Office NCR 2014-2015                          |               22314| Patent and Trade Office                  | Government  |
-| UADC1129    | 2014 - 2015   | Baltimore - YAIP                    | Alumni        | ECSM BAL YAIP 2014-2015                                        |               21213| Episcopal Community Services of Maryland | Non-profit  |
-| UADC1254    | 2014 - 2015   | DC - Year Round High School Program | Active        | Office of Personnel Management - Retirement Services 2014-2015 |               20240| Office of Personnel Management           | Government  |
-| UADC1007    | 2014 - 2015   | NCR                                 | Active        | Alexandria City Attorney's Office NCR 2014-2015                |               22314| Alexandria City Attorney's Office        | Government  |
+| DataCamp ID | Academic Year | Location                            | Intern Status | Intern Work Site                                               |  Work Site ZIP Code|
+|:------------|:--------------|:------------------------------------|:--------------|:---------------------------------------------------------------|-------------------:|
+| UADC1096    | 2014 - 2015   | DC - Year Round High School Program | Active        | Clark Construction Group, LLC Accounts Payable 2014-2015       |               20814|
+| UADC1281    | 2014 - 2015   | NCR                                 | Active        | Patent and Trade Office NCR 2014-2015                          |               22314|
+| UADC1129    | 2014 - 2015   | Baltimore - YAIP                    | Alumni        | ECSM BAL YAIP 2014-2015                                        |               21213|
+| UADC1254    | 2014 - 2015   | DC - Year Round High School Program | Active        | Office of Personnel Management - Retirement Services 2014-2015 |               20240|
+| UADC1007    | 2014 - 2015   | NCR                                 | Active        | Alexandria City Attorney's Office NCR 2014-2015                |               22314|
 
 ``` r
-kable(dat[1:5, 9:16])
+kable(dat[1:5, 7:12])
 ```
 
-| Total Hours Worked | DOB        |  Mailing ZIP/Postal Code|  Median Household Income|  Labor Force Participation|  Unemployment Rate|    SSI|  Cash Assistance|
-|:------------------:|:-----------|------------------------:|------------------------:|--------------------------:|------------------:|------:|----------------:|
-|         251        | 1996-02-21 |                    20019|                    34832|                      0.595|              0.136|  0.115|            0.103|
-|         162        | 1997-02-15 |                    22304|                    76061|                      0.788|              0.045|  0.022|            0.017|
-|         55         | 1993-11-15 |                    21215|                    34471|                      0.555|              0.102|  0.123|            0.064|
-|         129        | 1997-10-18 |                    20020|                    34685|                      0.561|              0.115|  0.113|            0.124|
-|         103        | 1997-06-11 |                    22312|                    76845|                      0.757|              0.037|  0.013|            0.016|
+| Organization                             | Industry    | Total Hours Worked | DOB        |  Mailing ZIP/Postal Code|  Median Household Income|
+|:-----------------------------------------|:------------|:------------------:|:-----------|------------------------:|------------------------:|
+| Clark Construction Group, LLC            | Real Estate |         251        | 1996-02-21 |                    20019|                    34832|
+| Patent and Trade Office                  | Government  |         162        | 1997-02-15 |                    22304|                    76061|
+| Episcopal Community Services of Maryland | Non-profit  |         55         | 1993-11-15 |                    21215|                    34471|
+| Office of Personnel Management           | Government  |         129        | 1997-10-18 |                    20020|                    34685|
+| Alexandria City Attorney's Office        | Government  |         103        | 1997-06-11 |                    22312|                    76845|
 
 ``` r
-kable(dat[1:5, 17:24])
+kable(dat[1:5, 13:19])
 ```
 
-|   SNAP|  All Families Below Poverty|  Educational Attainment - BA or Higher|  Female-Headed Households| Race            | Gender | High School                                                                 |  Title I School?|
-|------:|---------------------------:|--------------------------------------:|-------------------------:|:----------------|:-------|:----------------------------------------------------------------------------|----------------:|
-|  0.324|                       0.264|                                  0.134|                     0.188| Black           | F      | Washington Mathematics Science Technology Public Charter High School (WMST) |                1|
-|  0.048|                       0.046|                                  0.586|                     0.049| Hispanic/Latino | F      | TC Williams                                                                 |                0|
-|  0.268|                       0.223|                                  0.171|                     0.118| Black           | F      |                                                                             |               NA|
-|  0.348|                       0.317|                                  0.160|                     0.203| Black           | M      | Ballou Senior High School                                                   |                1|
-|  0.056|                       0.091|                                  0.435|                     0.044| Black           | F      | TC Williams                                                                 |                0|
+|  Labor Force Participation|  Unemployment Rate|    SSI|  Cash Assistance|   SNAP|  All Families Below Poverty|  Educational Attainment - BA or Higher|
+|--------------------------:|------------------:|------:|----------------:|------:|---------------------------:|--------------------------------------:|
+|                      0.595|              0.136|  0.115|            0.103|  0.324|                       0.264|                                  0.134|
+|                      0.788|              0.045|  0.022|            0.017|  0.048|                       0.046|                                  0.586|
+|                      0.555|              0.102|  0.123|            0.064|  0.268|                       0.223|                                  0.171|
+|                      0.561|              0.115|  0.113|            0.124|  0.348|                       0.317|                                  0.160|
+|                      0.757|              0.037|  0.013|            0.016|  0.056|                       0.091|                                  0.435|
 
 ``` r
-kable(dat[1:5, 24:33])
+kable(dat[1:5, 20:26])
 ```
 
-|  Title I School?|  FRL  |  Graduation Rate of HS|  College Enrollment Rate of HS|  HS ZIP Code|  NSC Data Available?| 1st Year College Enrollment | 1st Year College Type (2/4) | 1st Year College State | Student Quote |
-|----------------:|:-----:|----------------------:|------------------------------:|------------:|--------------------:|:----------------------------|:----------------------------|:-----------------------|:--------------|
-|                1| 1.000 |                  0.910|                             NA|        20002|                    0| NA                          | NA                          | NA                     |               |
-|                0| 0.630 |                  0.843|                             NA|        22302|                    0| NA                          | NA                          | NA                     |               |
-|               NA|   NA  |                     NA|                             NA|           NA|                    0| NA                          | NA                          | NA                     |               |
-|                1| 0.998 |                  0.500|                             NA|        20032|                    0| NA                          | NA                          | NA                     |               |
-|                0| 0.630 |                  0.843|                             NA|        22302|                    0| NA                          | NA                          | NA                     |               |
+|  Female-Headed Households| Race            | Gender | High School                                                                 |  Title I School?|  FRL  |  Graduation Rate of HS|
+|-------------------------:|:----------------|:-------|:----------------------------------------------------------------------------|----------------:|:-----:|----------------------:|
+|                     0.188| Black           | F      | Washington Mathematics Science Technology Public Charter High School (WMST) |                1| 1.000 |                  0.910|
+|                     0.049| Hispanic/Latino | F      | TC Williams                                                                 |                0| 0.630 |                  0.843|
+|                     0.118| Black           | F      |                                                                             |               NA|   NA  |                     NA|
+|                     0.203| Black           | M      | Ballou Senior High School                                                   |                1| 0.998 |                  0.500|
+|                     0.044| Black           | F      | TC Williams                                                                 |                0| 0.630 |                  0.843|
+
+``` r
+kable(dat[1:5, 26:33])
+```
+
+|  Graduation Rate of HS|  College Enrollment Rate of HS|  HS ZIP Code|  NSC Data Available?| 1st Year College Enrollment | 1st Year College Type (2/4) | 1st Year College State | Student Quote |
+|----------------------:|------------------------------:|------------:|--------------------:|:----------------------------|:----------------------------|:-----------------------|:--------------|
+|                  0.910|                             NA|        20002|                    0| NA                          | NA                          | NA                     |               |
+|                  0.843|                             NA|        22302|                    0| NA                          | NA                          | NA                     |               |
+|                     NA|                             NA|           NA|                    0| NA                          | NA                          | NA                     |               |
+|                  0.500|                             NA|        20032|                    0| NA                          | NA                          | NA                     |               |
+|                  0.843|                             NA|        22302|                    0| NA                          | NA                          | NA                     |               |
 
 ### Variables
 

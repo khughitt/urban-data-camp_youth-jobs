@@ -22,6 +22,32 @@ options(stringsAsFactors=FALSE)
 rm(list=ls())    # Clean up any existing variables
 ```
 
+Overview
+========
+
+Questions
+---------
+
+1. Can we show that job opportunities for less-privileged youths leads to good
+   outcomes later in life? (College enrollment, etc.)
+
+Notes
+-----
+
+### General
+
+- "Alumni" 
+- "Terminated" - didn't finish
+
+### Factors associated with a positive outcome:
+
+- college enrollment
+- college persistence
+- alumni
+
+Methods
+=======
+
 Load data
 ---------
 
@@ -32,15 +58,31 @@ library(dplyr)
 dat = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29.csv')
 
 # preview data
-kable(dat[1:5, 1:8])
-kable(dat[1:5, 9:16])
-kable(dat[1:5, 17:24])
-kable(dat[1:5, 24:33])
+kable(dat[1:5, 1:6])
+kable(dat[1:5, 7:12])
+kable(dat[1:5, 13:19])
+kable(dat[1:5, 20:26])
+kable(dat[1:5, 26:33])
 ```
 
 ### Variables
 
+Note: Formatting for metadata is a little bit messed up...
+
 ```{r variables, results='asis'}
 metadata = read_csv('input/UA_UI_DataCamp_with_Codebook_4_29_metadata.csv')
 kable(metadata)
+
+# convert dates to factors so they aren't treated as numeric
+dat[['Work Site ZIP Code']]      = factor(dat[['Work Site ZIP Code']])
+dat[['Mailing ZIP/Postal Code']] = factor(dat[['Mailing ZIP/Postal Code']])
+dat[['HS ZIP Code']]             = factor(dat[['HS ZIP Code']])
 ```
+
+### Exploratory data analysis
+
+```{r eda}
+library(gplots)
+
+```
+

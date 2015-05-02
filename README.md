@@ -210,18 +210,23 @@ library(gplots)
 library(bpca)
 library(RColorBrewer)
 
-dat_short = dat %>% select(intern_status, total_hours_worked,
-                           median_household_income,
-                           labor_force_participation, unemployment_rate,
-                           ssi, cash_assistance, snap,
-                           all_families_below_poverty,
-                           educational_attainment_ba, female_headed_households,
-                           graduation_rate_of_hs)
-
+# create short version of data with a subset of the fields and not including
+# the current (2014-2015) interns who haven't yet finished
+dat_short = dat %>%
+    filter(academic_year != '2014 - 2015' & industry != "") %>%
+    select(intern_status, industry, total_hours_worked,
+           median_household_income, labor_force_participation,
+           unemployment_rate, ssi, cash_assistance, snap,
+           all_families_below_poverty, educational_attainment_ba,
+           female_headed_households, graduation_rate_of_hs) %>%
+    mutate(intern_status=ifelse(intern_status %in% 
+                                c("Alumni", "Summer Program Alumni"),
+                                "Alumni", "Terminated"))
+    
 dat_short_complete = dat_short[complete.cases(dat_short),]
 
 # Heatmap
-heatmap.2(cor(as.matrix(dat_short_complete %>% select(-intern_status))),
+heatmap.2(cor(as.matrix(dat_short_complete %>% select(-intern_status, -industry))),
           margins=c(26, 26), trace='none')
 ```
 
@@ -236,7 +241,7 @@ names(location_colors) = dat$location
 location_colors_complete = location_colors[complete.cases(dat_short)]
 
 # biplot
-plot(bpca(dat_short_complete %>% select(-intern_status),
+plot(bpca(dat_short_complete %>% select(-intern_status, -industry),
           var.color=location_colors_complete, scale=TRUE))
 ```
 
@@ -264,14 +269,17 @@ dat_scaled$all_families_below_poverty = rescale(dat_scaled$all_families_below_po
 # numeric fields only
 #mat = dat_short_complete %>% select(-intern_status)
 #mat_scaled = scale(dat_short_complete)
-heatmap.2(as.matrix(dat_scaled %>% select(-intern_status)),
-          margins=c(26, 26), trace='none',
-          RowSideColors=location_colors_complete)
+heatmap.2(as.matrix(dat_scaled %>% select(-intern_status, -industry)),
+          margins=c(26, 26), trace='none')
 ```
 
 ![](README_files/figure-markdown_github/student_vis-1.png)
 
-#### Intern status
+``` r
+          #RowSideColors=location_colors_complete)
+```
+
+#### Median household income vs. Hours worked
 
 ``` r
 library(ggplot2)
@@ -280,4 +288,21 @@ ggplot(dat_short_complete, aes(total_hours_worked, median_household_income,
     geom_point(aes(color=intern_status))
 ```
 
-![](README_files/figure-markdown_github/inter_status-1.png)
+![](README_files/figure-markdown_github/household_income_vs_intern_status-1.png)
+
+#### Intern status vs. Industry
+
+``` r
+dat_short_complete %>% group_by(industry) %>% ggplot(aes(intern_status)) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    geom_bar() +
+    facet_wrap(~industry)
+```
+
+![](README_files/figure-markdown_github/intern_status_vs_industry-1.png)
+
+``` r
+#ggplot(dat_short_complete, aes(intern_status, total_hours_worked,
+#                               group=industry), color=industry) +
+#    geom_point(aes(color=industry))
+```

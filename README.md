@@ -211,9 +211,13 @@ library(bpca)
 library(RColorBrewer)
 
 # create short version of data with a subset of the fields and not including
-# the current (2014-2015) interns who haven't yet finished
+# the current (2014-2015) interns who haven't yet finished; remove rows with
+# duplicated ids
+duplicate_ids = names(table(dat$datacamp_id)[table(dat$datacamp_id) > 1])
 dat_short = dat %>%
-    filter(academic_year != '2014 - 2015' & industry != "") %>%
+    filter(academic_year != '2014 - 2015' & 
+           industry != "" & 
+           !datacamp_id %in% duplicate_ids) %>%
     select(datacamp_id, intern_status, industry, total_hours_worked,
            median_household_income, labor_force_participation,
            unemployment_rate, ssi, cash_assistance, snap,
@@ -272,14 +276,11 @@ dat_scaled$all_families_below_poverty = rescale(dat_scaled$all_families_below_po
 #mat = dat_short_complete %>% select(-intern_status)
 #mat_scaled = scale(dat_short_complete)
 heatmap.2(as.matrix(dat_scaled %>% select(-intern_status, -industry)),
-          margins=c(26, 26), trace='none')
+          margins=c(26, 26), trace='none',
+          RowSideColors=location_colors_complete)
 ```
 
 ![](README_files/figure-markdown_github/student_vis-1.png)
-
-``` r
-          #RowSideColors=location_colors_complete)
-```
 
 #### Median household income vs. Hours worked
 
@@ -308,3 +309,50 @@ dat_short_complete %>% group_by(industry) %>% ggplot(aes(intern_status)) +
 #                               group=industry), color=industry) +
 #    geom_point(aes(color=industry))
 ```
+
+Session info
+============
+
+``` r
+date()
+```
+
+    ## [1] "Sat May  2 14:45:16 2015"
+
+``` r
+sessionInfo()
+```
+
+    ## R version 3.1.3 (2015-03-09)
+    ## Platform: x86_64-unknown-linux-gnu (64-bit)
+    ## Running under: Arch Linux
+    ## 
+    ## locale:
+    ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+    ##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+    ##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+    ##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+    ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+    ## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+    ## 
+    ## attached base packages:
+    ## [1] stats     graphics  grDevices utils     datasets  methods   base     
+    ## 
+    ## other attached packages:
+    ##  [1] ggplot2_1.0.1        RColorBrewer_1.1-2   bpca_1.2-2          
+    ##  [4] rgl_0.95.1201        scatterplot3d_0.3-35 gplots_2.16.0       
+    ##  [7] dplyr_0.4.1          readr_0.1.0          knitr_1.9.17        
+    ## [10] rmarkdown_0.5.1      knitrBootstrap_1.0.0 setwidth_1.0-3      
+    ## [13] colorout_1.0-3       vimcom_1.2-3        
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##  [1] assertthat_0.1     bitops_1.0-6       caTools_1.17.1    
+    ##  [4] colorspace_1.2-6   DBI_0.3.1          digest_0.6.8      
+    ##  [7] evaluate_0.6       formatR_1.1        gdata_2.13.3      
+    ## [10] grid_3.1.3         gtable_0.1.2       gtools_3.4.2      
+    ## [13] highr_0.4.1        htmltools_0.2.6    KernSmooth_2.23-14
+    ## [16] labeling_0.3       lazyeval_0.1.10    magrittr_1.5      
+    ## [19] markdown_0.7.4     MASS_7.3-40        munsell_0.4.2     
+    ## [22] parallel_3.1.3     plyr_1.8.1         proto_0.3-10      
+    ## [25] Rcpp_0.11.5        reshape2_1.4.1     scales_0.2.4      
+    ## [28] stringr_0.6.2      tools_3.1.3        yaml_2.1.13
